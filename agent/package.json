@@ -1,0 +1,13 @@
+{
+  "name": "sur-caja-agent",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "triage": "node triage.ts"
+  },
+  "engines": { "node": ">=22.18" },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.3.269",
+    "zod": "^4.0.0"
+  }
+}
