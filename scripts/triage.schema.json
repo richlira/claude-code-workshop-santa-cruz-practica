@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "key": { "type": "string", "description": "Ticket key, e.g. SC-101" },
+    "tipo": { "type": "string", "enum": ["bug", "feature", "pregunta"] },
+    "severidad": { "type": "string", "enum": ["alta", "media", "baja"] },
+    "resumen": { "type": "string", "description": "One line, in Spanish" }
+  },
+  "required": ["key", "tipo", "severidad", "resumen"],
+  "additionalProperties": false
+}

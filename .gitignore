@@ -3,3 +3,6 @@ node_modules/
 .claude/settings.json
 .claude/plans/
 _preview/
+triage.json
+triage.md
+REPORTE.md
