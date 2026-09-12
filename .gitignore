@@ -6,3 +6,6 @@ _preview/
 triage.json
 triage.md
 REPORTE.md
+agent/node_modules/
+agent/out/
+.claude/worktrees/
