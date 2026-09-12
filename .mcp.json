@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "tickets": {
+      "command": "node",
+      "args": ["mcp/tickets_server.mjs"]
+    }
+  }
+}

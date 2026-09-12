@@ -1,0 +1,5 @@
+node_modules/
+.claude/settings.local.json
+.claude/settings.json
+.claude/plans/
+_preview/
