@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>La práctica · Workshop Claude Code · Santa Cruz</title>
+<style>
+:root{--cr:#FAF9F5;--tc:#D97757;--ink:#141413;--sand:#E8E6DC;--sand2:#F0EEE6;--gray:#8F8C84;--gray2:#B0AEA5;--ok:#3f7d4e;--amb:#b8791c;
+--disp:Georgia,'Times New Roman',serif;--sans:system-ui,-apple-system,'Helvetica Neue',sans-serif;--mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cr);color:var(--ink);font:18px/1.55 var(--disp);padding:0 0 80px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+header{padding:72px 0 44px;border-bottom:3px solid var(--ink)}
+.star{width:64px;height:64px;margin-bottom:30px;display:block}
+.eyebrow{font-family:var(--sans);font-size:14px;letter-spacing:.24em;text-transform:uppercase;color:var(--tc);margin-bottom:18px}
+h1{font-family:var(--disp);font-weight:500;font-size:clamp(38px,6vw,64px);line-height:1.04;letter-spacing:-.01em}
+.sub{font-family:var(--sans);font-size:15px;letter-spacing:.08em;color:var(--gray);margin-top:18px;text-transform:uppercase}
+.intro{font-size:21px;line-height:1.6;max-width:760px;margin:26px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.chip{font-family:var(--mono);font-size:14px;background:var(--sand2);border:1px solid var(--sand);border-radius:10px;padding:7px 14px;color:var(--ink)}
+.aviso{background:#fff;border:1px solid var(--sand);border-left:5px solid var(--tc);border-radius:10px;padding:18px 22px;margin:36px 0 0;font-size:16.5px;line-height:1.55}
+.aviso b{color:var(--tc)}
+.aviso code,.setup code{font-family:var(--mono);font-size:.92em;background:var(--sand2);padding:1px 6px;border-radius:6px}
+h2.sec{font-family:var(--sans);font-size:14px;letter-spacing:.22em;text-transform:uppercase;color:var(--tc);margin:56px 0 22px}
+h2.sec.b{color:var(--ok)}h2.sec.i{color:var(--amb)}h2.sec.a{color:var(--tc)}
+p.lvl{font-size:17px;color:var(--gray);margin:-12px 0 22px}
+.setup{background:#fff;border:1px solid var(--sand);border-radius:18px;padding:26px 28px;font-size:16.5px;line-height:1.7}
+.setup li{margin-left:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+.card{background:#fff;border:1px solid var(--sand);border-radius:18px;padding:26px 24px;display:flex;flex-direction:column;gap:10px;transition:transform .12s ease,box-shadow .12s ease;color:inherit;text-decoration:none}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(20,20,19,.08)}
+.card .num{font-family:var(--disp);font-size:38px;color:var(--tc);line-height:1}
+.card .k{font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gray)}
+.card h3{font-family:var(--disp);font-weight:500;font-size:25px;line-height:1.12}
+.card p{font-size:16px;line-height:1.5;color:var(--ink)}
+.card .dir{font-family:var(--mono);font-size:13px;color:var(--tc);margin-top:auto;padding-top:12px}
+.card.hot{background:var(--tc);border-color:var(--tc)}
+.card.hot .num,.card.hot h3,.card.hot p,.card.hot .dir{color:var(--cr)}
+.card.hot .k{color:var(--cr);opacity:.8}
+footer{margin-top:72px;padding-top:30px;border-top:1px solid var(--sand);font-family:var(--sans);font-size:14px;color:var(--gray);line-height:1.7}
+footer b{color:var(--ink)}
+footer .links{letter-spacing:.14em;text-transform:uppercase;font-size:13px;margin-top:10px}
+footer .links span{color:var(--tc)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <svg class="star" viewBox="0 0 100 100" aria-hidden="true">
+    <g stroke="#D97757" stroke-width="9" stroke-linecap="round">
+      <line x1="50" y1="6" x2="50" y2="94"/>
+      <line x1="6" y1="50" x2="94" y2="50"/>
+      <line x1="19" y1="19" x2="81" y2="81"/>
+      <line x1="81" y1="19" x2="19" y2="81"/>
+      <line x1="33" y1="9" x2="67" y2="91"/>
+      <line x1="91" y1="33" x2="9" y2="67"/>
+    </g>
+  </svg>
+  <p class="eyebrow">Claude Community · México · LatAm</p>
+  <h1>Workshop Claude Code<br>La práctica</h1>
+  <p class="sub">AgenTICs 2026 · UPSA · Santa Cruz · de la terminal hacia arriba</p>
+  <p class="intro">Nueve demos y dieciséis ejercicios sobre un solo repo de juguete, <b>sur-caja</b>: una API chica de pedidos y pagos QR con un bug plantado. El repo es disfraz; el músculo es el loop: explorar → plan → implementar → verificar → commit, y después codificarlo en skills, hooks, MCP, subagents, scripts y el Agent SDK.</p>
+  <div class="chips">
+    <span class="chip">Claude Code + plan pago</span>
+    <span class="chip">Node ≥ 22.18</span>
+    <span class="chip">git</span>
+    <span class="chip">jq (EJ 12, opcional)</span>
+    <span class="chip">Ollama + modelo chico (EJ 16)</span>
+    <span class="chip">API key de platform.claude.com (EJ 14-15)</span>
+  </div>
+  <div class="aviso"><b>Antes de empezar:</b> al abrir <code>claude</code> en este repo aceptá el trust del folder y revisá sus hooks y su MCP cuando te lo pida: ese diálogo es parte de la lección. Todo lo &ldquo;sensible&rdquo; del repo (<code>.env</code>, tickets, montos) es utilería falsa. <code>./reset-demo.sh</code> lo deja como al inicio.</div>
+</header>
+
+<h2 class="sec">Setup check</h2>
+<div class="setup">
+  <ol>
+    <li><code>claude --version</code> responde y <code>claude</code> ya hizo login una vez.</li>
+    <li><code>node --version</code> da 22.18 o más nuevo.</li>
+    <li><code>cd sur-caja &amp;&amp; npm test</code> → 2 verdes y 1 rojo. El rojo es a propósito (SC-101).</li>
+    <li>Para EJ 14 y 15: <code>cd agent &amp;&amp; npm install</code> con red, y una API key de platform.claude.com con unos dólares de crédito (el Agent SDK no usa el login de claude.ai).</li>
+    <li>Para EJ 16: Ollama reciente con un modelo chico ya descargado y corrido una vez.</li>
+  </ol>
+</div>
+
+<h2 class="sec">Las nueve demos</h2>
+<p class="lvl">Lo que pasa en el proyector. Cada una trae el prompt exacto y lo que tiene que pasar, para repetirla en tu máquina.</p>
+<div class="grid">
+  <a class="card" href="../demos/00-dos-puertas.md">
+    <span class="num">D0</span>
+    <span class="k">Demo 0</span>
+    <h3>Dos puertas</h3>
+    <p>Claude.ai vs claude adentro del repo. No le pegamos el archivo: él lo encontró.</p>
+    <span class="dir">demos/00-dos-puertas.md</span>
+  </a>
+  <a class="card" href="../demos/01-test-roto.md">
+    <span class="num">D1</span>
+    <span class="k">Demo 1</span>
+    <h3>Test roto</h3>
+    <p>El loop entero en un prompt. Read, Read, Edit, npm test verde.</p>
+    <span class="dir">demos/01-test-roto.md</span>
+  </a>
+  <a class="card" href="../demos/02-plan-brief-commit.md">
+    <span class="num">D2</span>
+    <span class="k">Demo 2</span>
+    <h3>Plan, brief, steer, commit</h3>
+    <p>/init, plan mode, Brief A, un steer a mitad, un commit leído.</p>
+    <span class="dir">demos/02-plan-brief-commit.md</span>
+  </a>
+  <a class="card" href="../demos/03-skill-mcp-hook.md">
+    <span class="num">D3</span>
+    <span class="k">Demo 3</span>
+    <h3>Skill por MCP + hook</h3>
+    <p>/repro trae el ticket por MCP; tsc corre solo después del Edit.</p>
+    <span class="dir">demos/03-skill-mcp-hook.md</span>
+  </a>
+  <a class="card" href="../demos/04-deny-gana.md">
+    <span class="num">D4</span>
+    <span class="k">Demo 4</span>
+    <h3>Deny gana</h3>
+    <p>El hook le gana a --dangerously-skip-permissions.</p>
+    <span class="dir">demos/04-deny-gana.md</span>
+  </a>
+  <a class="card" href="../demos/05-triage-headless.md">
+    <span class="num">D5</span>
+    <span class="k">Demo 5</span>
+    <h3>Triage headless</h3>
+    <p>Cinco tickets, cinco JSON, cero UI, unos centavos.</p>
+    <span class="dir">demos/05-triage-headless.md</span>
+  </a>
+  <a class="card" href="../demos/06-subagent-aislado.md">
+    <span class="num">D6</span>
+    <span class="k">Demo 6</span>
+    <h3>Subagent aislado</h3>
+    <p>@refactorizador en un worktree, con haiku. Main no se mueve.</p>
+    <span class="dir">demos/06-subagent-aislado.md</span>
+  </a>
+  <a class="card" href="../demos/07-triage-sdk.md">
+    <span class="num">D7</span>
+    <span class="k">Demo 7</span>
+    <h3>Triage embebido (Agent SDK)</h3>
+    <p>El mismo triage, en treinta líneas de TypeScript con una tool tipada.</p>
+    <span class="dir">demos/07-triage-sdk.md</span>
+  </a>
+  <a class="card" href="../demos/08-modelo-local.md">
+    <span class="num">D8</span>
+    <span class="k">Demo 8</span>
+    <h3>Contra un modelo local</h3>
+    <p>Mismo Claude Code, otro backend. Más lento, cero datos afuera.</p>
+    <span class="dir">demos/08-modelo-local.md</span>
+  </a>
+</div>
+
+<h2 class="sec b">Básico · ejercicios 1 a 3</h2>
+<p class="lvl">Básico · seguir un prompt y leer lo que pasa.</p>
+<div class="grid">
+  <a class="card" href="../ejercicios/01-explora.md">
+    <span class="num">01</span>
+    <span class="k">Ejercicio 1 · básico</span>
+    <h3>Explorá el repo</h3>
+    <p>Plan mode, sin editar. Qué lee antes de responder.</p>
+    <span class="dir">ejercicios/01-explora.md</span>
+  </a>
+  <a class="card" href="../ejercicios/02-arregla-el-test.md">
+    <span class="num">02</span>
+    <span class="k">Ejercicio 2 · básico</span>
+    <h3>Arreglá el test</h3>
+    <p>El test rojo es el contrato. Read antes de Edit.</p>
+    <span class="dir">ejercicios/02-arregla-el-test.md</span>
+  </a>
+  <a class="card" href="../ejercicios/03-init-y-recorta.md">
+    <span class="num">03</span>
+    <span class="k">Ejercicio 3 · básico</span>
+    <h3>/init y recortá</h3>
+    <p>Un CLAUDE.md de menos de 80 líneas que pasa el test de poda.</p>
+    <span class="dir">ejercicios/03-init-y-recorta.md</span>
+  </a>
+</div>
+
+<h2 class="sec i">Intermedio · ejercicios 4 a 10</h2>
+<p class="lvl">Intermedio · escribir el brief, aprobar un plan, registrar una pieza.</p>
+<div class="grid">
+  <a class="card hot" href="../ejercicios/04-plan-brief-steer-commit.md">
+    <span class="num">04</span>
+    <span class="k">Ejercicio 4 · intermedio</span>
+    <h3>Plan + brief + steer + commit</h3>
+    <p>El ejercicio central: conciliar() con el loop completo.</p>
+    <span class="dir">ejercicios/04-plan-brief-steer-commit.md</span>
+  </a>
+  <a class="card" href="../ejercicios/05-repro.md">
+    <span class="num">05</span>
+    <span class="k">Ejercicio 5 · intermedio</span>
+    <h3>/repro SC-103</h3>
+    <p>Una skill que trae el ticket por MCP y no arregla.</p>
+    <span class="dir">ejercicios/05-repro.md</span>
+  </a>
+  <a class="card" href="../ejercicios/06-hook-tsc.md">
+    <span class="num">06</span>
+    <span class="k">Ejercicio 6 · intermedio</span>
+    <h3>Registrá el hook</h3>
+    <p>Tsc después de cada Edit, sin que se lo pidas.</p>
+    <span class="dir">ejercicios/06-hook-tsc.md</span>
+  </a>
+  <a class="card" href="../ejercicios/07-comando-pr.md">
+    <span class="num">07</span>
+    <span class="k">Ejercicio 7 · intermedio</span>
+    <h3>Tu primer comando: /pr</h3>
+    <p>Un prompt con nombre, versionado.</p>
+    <span class="dir">ejercicios/07-comando-pr.md</span>
+  </a>
+  <a class="card" href="../ejercicios/08-subagent-explore.md">
+    <span class="num">08</span>
+    <span class="k">Ejercicio 8 · intermedio</span>
+    <h3>Subagent Explore</h3>
+    <p>Que otro lea por vos. /context antes y después.</p>
+    <span class="dir">ejercicios/08-subagent-explore.md</span>
+  </a>
+  <a class="card" href="../ejercicios/09-protege-env.md">
+    <span class="num">09</span>
+    <span class="k">Ejercicio 9 · intermedio</span>
+    <h3>Protegé .env</h3>
+    <p>Un hook PreToolUse: una pared, no un ruego.</p>
+    <span class="dir">ejercicios/09-protege-env.md</span>
+  </a>
+  <a class="card" href="../ejercicios/10-tu-tool-en-el-mcp.md">
+    <span class="num">10</span>
+    <span class="k">Ejercicio 10 · intermedio</span>
+    <h3>Tu tool en el MCP</h3>
+    <p>Search_tickets() en un server de 60 líneas.</p>
+    <span class="dir">ejercicios/10-tu-tool-en-el-mcp.md</span>
+  </a>
+</div>
+
+<h2 class="sec a">Avanzado · ejercicios 11 a 16</h2>
+<p class="lvl">Avanzado · diseñar una pieza propia, correr Code sin UI, embeberlo, correrlo local.</p>
+<div class="grid">
+  <a class="card" href="../ejercicios/11-tu-skill.md">
+    <span class="num">11</span>
+    <span class="k">Ejercicio 11 · avanzado</span>
+    <h3>Tu skill</h3>
+    <p>/conciliar-report: un contrato de salida propio.</p>
+    <span class="dir">ejercicios/11-tu-skill.md</span>
+  </a>
+  <a class="card" href="../ejercicios/12-script-headless.md">
+    <span class="num">12</span>
+    <span class="k">Ejercicio 12 · avanzado</span>
+    <h3>Script headless</h3>
+    <p>Claude -p + --json-schema + --allowedTools "" en un cron.</p>
+    <span class="dir">ejercicios/12-script-headless.md</span>
+  </a>
+  <a class="card" href="../ejercicios/13-subagent-aislado.md">
+    <span class="num">13</span>
+    <span class="k">Ejercicio 13 · avanzado</span>
+    <h3>Subagent aislado y barato</h3>
+    <p>Isolation: worktree + model: haiku en diez líneas.</p>
+    <span class="dir">ejercicios/13-subagent-aislado.md</span>
+  </a>
+  <a class="card hot" href="../ejercicios/14-corre-el-agente-sdk.md">
+    <span class="num">14</span>
+    <span class="k">Ejercicio 14 · avanzado</span>
+    <h3>Corré el agente del SDK</h3>
+    <p>Claude Code adentro de tu proceso. Leé el stream.</p>
+    <span class="dir">ejercicios/14-corre-el-agente-sdk.md</span>
+  </a>
+  <a class="card" href="../ejercicios/15-tus-tools-en-el-sdk.md">
+    <span class="num">15</span>
+    <span class="k">Ejercicio 15 · avanzado</span>
+    <h3>Tus tools en el SDK</h3>
+    <p>Sacale las manos, dale las tuyas. Mínimo privilegio.</p>
+    <span class="dir">ejercicios/15-tus-tools-en-el-sdk.md</span>
+  </a>
+  <a class="card" href="../ejercicios/16-modelo-local.md">
+    <span class="num">16</span>
+    <span class="k">Ejercicio 16 · avanzado</span>
+    <h3>Modelo local</h3>
+    <p>Ollama launch claude. Cero datos afuera.</p>
+    <span class="dir">ejercicios/16-modelo-local.md</span>
+  </a>
+</div>
+
+<footer>
+  <p><b>Nadie tiene que llegar al dieciséis; todos tienen que pasar del cuatro.</b> El lunes: <code>cd tu-repo &amp;&amp; claude</code>, <code>/init</code> y recortá, una feature de tres archivos en plan mode con el brief, un commit.</p>
+  <p class="links">claudecommunity.mx <span>·</span> code.claude.com/docs <span>·</span> code.claude.com/docs/en/agent-sdk</p>
+  <p style="margin-top:14px">Proyecto de la Claude Community México, hecho para el workshop de Santa Cruz (AgenTICs 2026, UPSA). No es material oficial de Anthropic. Todo lo sensible del repo es utilería falsa. MIT.</p>
+</footer>
+
+</div>
+</body>
+</html>
